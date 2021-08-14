@@ -1,0 +1,93 @@
+package se04.ex01;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@SuppressWarnings("serial")
+@WebServlet("/guguTest3")
+public class GuguTest3 extends HttpServlet {
+	
+
+
+	public void init(ServletConfig config) throws ServletException {
+		System.out.println("init 메서드 호출");
+	}
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doGet 메서드 호출");
+		doHandle(request, response);
+		
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doPost 메서드 호출");
+		doHandle(request, response);
+	}
+	
+	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("doHandle 메서드 호출");
+		
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+
+		
+		int dan = (Integer.parseInt((request.getParameter("dan"))));
+		System.out.println("입력받은 단: " + dan);
+		
+//		out.print("<html>");
+//		out.print("<body>");
+		
+		out.print("<table border='1' width='1200' align='center'>");
+		out.print("<tr align='center' bgcolor='#FFFF66'>");
+		out.print("<td colspan='4'>" + dan + " 단 출력 </td>");
+		out.print("</tr>");
+		
+		for(int i=0; i < 10; i++) {
+			if(i % 2 == 0) {
+				out.print("<tr align='center' bgcolor='#ACFA58'>");
+			} else {
+				out.print("<tr align='center' bgcolor='#81BEF7'>");
+			}
+			out.print("<td width='200'>");
+			out.print("<input type='radio' />" + i);
+			out.print("</td>");
+			
+			out.print("<td width='200'>");
+			out.print("<input type='checkbox' />" + i);
+			out.print("</td>");
+			
+			
+			
+			out.print("<td width='400'>");
+			out.print(dan + " * " + i);
+			out.print("</td>");
+			out.print("<td with='400'>");
+			out.print(i * dan);
+			out.print("</td>");
+			out.print("</tr>");
+		}
+			out.print("</table>");
+		
+		
+//		out.print("</body>");
+//		out.print("</html>");
+		
+	}
+	
+
+	public void destroy() {
+		System.out.println("destory 메서드 호출");
+	}
+
+}
