@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @SuppressWarnings("serial")
-@WebServlet("/login")
+/* @WebServlet("/login") */
 public class LoginServlet extends HttpServlet {
 
 
